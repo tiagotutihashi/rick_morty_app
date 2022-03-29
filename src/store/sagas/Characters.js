@@ -38,6 +38,8 @@ function* getByIdCharacter({payload}) {
     const {data, status} = yield call(api.get, `/character/${payload}`);
     if (status === 200) {
       yield put(CharactersActions.GetByIdCharacterSuccess(data));
+    } else if (status === 304) {
+      yield put(CharactersActions.GetByIdCharacterSuccess([]));
     } else {
       yield put(CharactersActions.GetByIdCharacterFailure());
     }
